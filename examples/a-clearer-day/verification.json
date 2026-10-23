@@ -1,0 +1,50 @@
+{
+  "duration_seconds": 180.0,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "frame_rate": "24/1",
+  "pixel_format": "yuv420p",
+  "color_space": "bt709",
+  "color_range": "tv",
+  "full_decode": "passed",
+  "encoded_audio_correlations": [
+    {
+      "start": 2,
+      "end": 9,
+      "correlation": 0.9992535638639217
+    },
+    {
+      "start": 35,
+      "end": 42,
+      "correlation": 0.9997417755817307
+    },
+    {
+      "start": 65,
+      "end": 72,
+      "correlation": 0.9997445710531541
+    },
+    {
+      "start": 96,
+      "end": 103,
+      "correlation": 0.9997200179188839
+    },
+    {
+      "start": 126,
+      "end": 133,
+      "correlation": 0.999802505022144
+    },
+    {
+      "start": 160,
+      "end": 167,
+      "correlation": 0.998824825067562
+    }
+  ],
+  "transcription_model": "faster-whisper base, local CPU int8",
+  "transcript_word_sequence_similarity": 0.9976190476190476,
+  "opening_phrase_count": 1,
+  "chapter_progression_checks": "passed",
+  "sha256": "b1d3ff8f49db69f66926226d47ba1528749bda795738e49c0fa2f3c47d11c388",
+  "size_bytes": 9906560
+}

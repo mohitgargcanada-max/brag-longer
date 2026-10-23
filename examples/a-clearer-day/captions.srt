@@ -1,0 +1,235 @@
+1
+00:00:00,800 --> 00:00:03,211
+Some mornings, the work starts before you do.
+
+2
+00:00:03,561 --> 00:00:04,713
+A message arrives.
+
+3
+00:00:05,063 --> 00:00:06,257
+A deadline moves.
+
+4
+00:00:06,607 --> 00:00:08,413
+An idea lands on a sticky note,
+
+5
+00:00:08,413 --> 00:00:12,026
+while another disappears into a tab you meant to come back to.
+
+6
+00:00:12,376 --> 00:00:15,405
+Nothing looks especially urgent, until everything does.
+
+7
+00:00:16,405 --> 00:00:19,435
+Meet Alex, the owner of a fictional design studio.
+
+8
+00:00:19,785 --> 00:00:24,307
+Today brings a client presentation, a team review, and a dozen loose ends.
+
+9
+00:00:24,657 --> 00:00:26,001
+The work is everywhere.
+
+10
+00:00:26,351 --> 00:00:27,503
+The plan is nowhere.
+
+11
+00:00:31,133 --> 00:00:33,117
+Imagine a quieter place to start.
+
+12
+00:00:33,467 --> 00:00:36,368
+One simple view for the things that need your attention.
+
+13
+00:00:36,718 --> 00:00:39,790
+Alex gathers the loose ends into a single inbox.
+
+14
+00:00:40,140 --> 00:00:41,655
+Prepare the presentation.
+
+15
+00:00:42,005 --> 00:00:43,370
+Review the first draft.
+
+16
+00:00:43,720 --> 00:00:44,830
+Send the follow-up.
+
+17
+00:00:45,180 --> 00:00:46,865
+Each item gets a clear name.
+
+18
+00:00:47,865 --> 00:00:50,020
+The inbox does not decide what matters.
+
+19
+00:00:50,370 --> 00:00:51,372
+Alex does.
+
+20
+00:00:51,722 --> 00:00:55,488
+That small distinction keeps the day grounded in real choices,
+
+21
+00:00:55,488 --> 00:00:58,464
+instead of another growing list of notifications.
+
+22
+00:01:02,092 --> 00:01:05,143
+The presentation becomes a few manageable steps.
+
+23
+00:01:05,493 --> 00:01:06,623
+Check the outline.
+
+24
+00:01:06,973 --> 00:01:08,659
+Choose the strongest examples.
+
+25
+00:01:09,009 --> 00:01:10,289
+Rehearse the opening.
+
+26
+00:01:10,639 --> 00:01:13,199
+A task that felt vague starts to look possible.
+
+27
+00:01:14,199 --> 00:01:18,778
+Alex moves those steps into today's plan, leaves tomorrow's work for tomorrow,
+
+28
+00:01:18,778 --> 00:01:20,364
+and makes room for a break.
+
+29
+00:01:20,714 --> 00:01:22,677
+The goal is not to fill every minute.
+
+30
+00:01:23,027 --> 00:01:25,843
+It is to see what fits, and notice what does not,
+
+31
+00:01:25,843 --> 00:01:27,912
+before the calendar decides for you.
+
+32
+00:01:31,508 --> 00:01:33,577
+Good plans leave less room for guessing.
+
+33
+00:01:33,927 --> 00:01:35,282
+In our fictional studio,
+
+34
+00:01:35,282 --> 00:01:39,175
+each shared task shows who owns the next step and where things stand.
+
+35
+00:01:39,525 --> 00:01:41,147
+The draft is ready for review.
+
+36
+00:01:41,497 --> 00:01:43,566
+The presentation is in progress.
+
+37
+00:01:43,916 --> 00:01:45,324
+The follow-up can wait.
+
+38
+00:01:46,324 --> 00:01:49,076
+When the plan changes, Alex updates the card.
+
+39
+00:01:49,426 --> 00:01:51,346
+Everyone can see the same next step.
+
+40
+00:01:51,696 --> 00:01:52,170
+A small,
+
+41
+00:01:52,170 --> 00:01:56,901
+clear update replaces a question that would otherwise arrive in another message.
+
+42
+00:02:00,508 --> 00:02:04,647
+With the priorities visible, Alex opens one task and gets to work.
+
+43
+00:02:04,997 --> 00:02:06,426
+One step is checked off.
+
+44
+00:02:06,776 --> 00:02:07,693
+Then another.
+
+45
+00:02:08,043 --> 00:02:10,061
+Progress becomes something you can see,
+
+46
+00:02:10,061 --> 00:02:12,545
+without turning the whole day into a scoreboard.
+
+47
+00:02:13,545 --> 00:02:16,211
+By the afternoon, the presentation is ready.
+
+48
+00:02:16,561 --> 00:02:18,609
+A remaining task moves to tomorrow.
+
+49
+00:02:18,959 --> 00:02:21,349
+The plan has changed, but it still makes sense.
+
+50
+00:02:21,699 --> 00:02:26,157
+That is what a useful plan should do when the day refuses to follow the script.
+
+51
+00:02:29,758 --> 00:02:32,553
+At the end of the day, Alex takes one last look.
+
+52
+00:02:32,903 --> 00:02:33,884
+What is finished?
+
+53
+00:02:34,234 --> 00:02:35,322
+What comes next?
+
+54
+00:02:35,672 --> 00:02:37,229
+What can wait until morning?
+
+55
+00:02:37,579 --> 00:02:40,322
+Just a little less searching, a little more clarity,
+
+56
+00:02:40,322 --> 00:02:42,273
+and a practical place to begin again.
+
+57
+00:02:43,273 --> 00:02:47,667
+This fictional product story was created as an example with Brag Longer.
+
+58
+00:02:48,017 --> 00:02:49,767
+Your product has its own story.
+
+59
+00:02:50,117 --> 00:02:54,298
+Start with what is real, show what matters, and give people a reason to care.

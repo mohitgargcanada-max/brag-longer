@@ -6,6 +6,16 @@ preview pages. Assembled and customized by **Mohit Garg (ScaleQor)**, inspired b
 **Shunit Haviv Hakimi's [/brag and /brag-slim](https://github.com/latent-spaces/brag)**.
 See [credits](CREDITS.md) and the preserved [original notice](NOTICE.md).
 
+## Three-minute example
+
+**A Clearer Day** — a fictional task-planning app, rendered as a complete 3:00 film
+with narration, captions and original procedural music.
+
+[![Watch the three-minute Brag Longer example](examples/a-clearer-day/poster.png)](https://github.com/mohitgargcanada-max/brag-longer/releases/download/demo-v1/A-Clearer-Day-v1-captioned.mp4)
+
+[Watch / download the video](https://github.com/mohitgargcanada-max/brag-longer/releases/download/demo-v1/A-Clearer-Day-v1-captioned.mp4)
+· [Example source, script and rebuild instructions](examples/a-clearer-day/README.md)
+
 ## What it does
 
 - Researches the product and writes a script for review.

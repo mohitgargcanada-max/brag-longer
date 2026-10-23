@@ -1,0 +1,13 @@
+{
+  "name": "A-Clearer-Day",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "say": {},
+  "music_bpm": 104,
+  "kokoro_dir": "tools/kokoro",
+  "delivery": "single",
+  "chapter_labels": false,
+  "product": "A Clearer Day",
+  "fiction_note": "Fictional product demo. All screens, people, businesses and scenarios are invented.",
+  "fps": 24
+}
