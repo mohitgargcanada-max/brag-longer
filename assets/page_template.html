@@ -1,0 +1,34 @@
+<title>/*TITLE*/</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Lato:wght@400;700&display=swap">
+<style>
+/* Layout: one narrow column of three voice cards, Brand tokens */
+/* Restyle: set these tokens (and the fonts link) to the product's brand; everything below uses them. */
+:root {
+  --bg: #F8F9FC; --card: #FFFFFF; --ink: #25243A; --muted: #5D5C72;
+  --line: #E4E3F2; --brand: #403D88; --accent: #5A56A7; --gold: #B3922B;
+  --display: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --body: "Lato", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121124; --card: #1B1A33; --ink: #D9D8E6; --muted: #9A99B5;
+  --line: #26244A; --brand: #FFFFFF; --accent: #8D89D6; --gold: #D4AF37; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #121124; --card: #1B1A33; --ink: #D9D8E6; --muted: #9A99B5;
+  --line: #26244A; --brand: #FFFFFF; --accent: #8D89D6; --gold: #D4AF37; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font: 15px/1.6 var(--body); }
+main { max-width: 640px; margin: 0 auto; padding-inline: 16px; padding-block: 40px 56px; display: grid; gap: 28px; }
+.eyebrow { font: 600 12px var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--gold); margin: 0; }
+h1 { font: 600 30px/1.2 var(--display); color: var(--brand); margin: 6px 0 10px; text-wrap: balance; }
+p { margin: 0; color: var(--muted); max-width: 65ch; }
+blockquote { margin: 0; padding: 14px 18px; border-left: 3px solid var(--accent); background: var(--card); border-radius: 0 10px 10px 0; font-style: italic; }
+.voices { display: grid; gap: 14px; }
+.voice { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; display: grid; gap: 10px; }
+.voice header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
+.voice h2 { font: 600 20px var(--display); color: var(--brand); margin: 0; }
+.tag { font: 500 12px var(--display); color: var(--accent); }
+audio { width: 100%; }
+.len { font-size: 13px; font-variant-numeric: tabular-nums; }
+</style>
+<main>
+/*BODY*/
+</main>

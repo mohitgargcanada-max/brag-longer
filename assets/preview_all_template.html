@@ -1,0 +1,101 @@
+<title>/*PRODUCT*/ Demo Videos</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Lato:wght@400;700&display=swap">
+<style>
+/* Layout: every version stacked, newest first; each is a player beside its chapter list. Brand tokens. */
+/* Restyle: set these tokens (and the fonts link) to the product's brand; everything below uses them. */
+:root {
+  --bg: #F8F9FC; --card: #FFFFFF; --ink: #25243A; --muted: #5D5C72; --line: #E4E3F2;
+  --brand: #403D88; --accent: #5A56A7; --gold: #B3922B; --sel: #F1F1F8; --new: #16A34A;
+  --display: "Poppins", "Segoe UI", system-ui, sans-serif; --body: "Lato", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121124; --card: #1B1A33; --ink: #D9D8E6; --muted: #9A99B5; --line: #26244A;
+  --brand: #FFFFFF; --accent: #8D89D6; --gold: #D4AF37; --sel: #26244A; --new: #52C793; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #121124; --card: #1B1A33; --ink: #D9D8E6; --muted: #9A99B5; --line: #26244A;
+  --brand: #FFFFFF; --accent: #8D89D6; --gold: #D4AF37; --sel: #26244A; --new: #52C793; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font: 15px/1.6 var(--body); }
+main { max-width: 1280px; margin: 0 auto; padding-inline: 16px; padding-block: 32px 56px; display: grid; gap: 36px; }
+.eyebrow { font: 600 12px var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--gold); margin: 0; }
+h1 { font: 600 30px/1.2 var(--display); color: var(--brand); margin: 4px 0 8px; text-wrap: balance; }
+h2 { font: 600 22px/1.3 var(--display); color: var(--brand); margin: 0; display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; }
+p { margin: 0; color: var(--muted); max-width: 76ch; }
+.tag { font: 500 12px var(--display); border-radius: 999px; padding: 2px 10px; border: 1px solid currentColor; color: var(--muted); }
+.tag.new { color: var(--new); }
+.version { display: grid; gap: 14px; border-top: 1px solid var(--line); padding-top: 26px; }
+.stage { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 20px; align-items: start; }
+@media (max-width: 860px) { .stage { grid-template-columns: minmax(0, 1fr); } }
+video { width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 12px; display: block; }
+.now { margin-top: 10px; font: 600 15px var(--display); color: var(--brand); }
+ol { list-style: none; margin: 0; padding: 6px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; display: grid; gap: 2px; }
+li button { width: 100%; display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; gap: 10px; align-items: baseline; text-align: left;
+  background: none; border: 0; border-radius: 10px; padding: 8px 10px; color: var(--ink); font: 400 14px var(--body); cursor: pointer; }
+li button:hover { background: var(--sel); }
+li button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+li button[aria-current="true"] { background: var(--sel); color: var(--brand); font-weight: 700; }
+.num { font: 600 13px var(--display); color: var(--gold); font-variant-numeric: tabular-nums; }
+.time { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.notes p { font-size: 14px; }
+.one-file { justify-self: start; font: 500 15px var(--display); color: #fff; background: var(--accent); border-radius: 10px; padding: 10px 18px; text-decoration: none; }
+.one-file:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }</style>
+<main>
+  <section>
+    <p class="eyebrow">/*PRODUCT*/ &middot; demo videos</p>
+    <h1>Every version of the /*PRODUCT*/ video</h1>
+    <p>Newest first. Each player runs straight through its chapters; pick a chapter to jump to it. Previews are 720p with captions; the full-quality 1080p files are in <code>/*FINAL_DIR*/</code>.</p>
+  </section>
+  <div id="versions"></div>
+  <section class="notes"><p>/*NOTE*/</p></section>
+</main>
+<script>
+const VERSIONS = /*VERSIONS*/[];
+const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+const pad = n => String(n).padStart(2, '0');
+VERSIONS.forEach((v, vi) => {
+  const sec = document.createElement('section');
+  sec.className = 'version';
+  sec.id = v.id;
+  const h = document.createElement('h2');
+  h.textContent = v.title;
+  const len = document.createElement('span'); len.className = 'tag' + (vi === 0 ? ' new' : ''); len.textContent = (vi === 0 ? 'Newest · ' : '') + v.length;
+  h.append(len);
+  const d = document.createElement('p'); d.textContent = v.description;
+  const stage = document.createElement('div'); stage.className = 'stage';
+  const left = document.createElement('div');
+  const player = document.createElement('video'); player.controls = true; player.playsInline = true; player.preload = 'metadata';
+  player.setAttribute('aria-label', v.title);
+  const now = document.createElement('div'); now.className = 'now';
+  left.append(player, now);
+  const list = document.createElement('ol');
+  let current = 0;
+  const load = (i, play) => {
+    current = i;
+    const c = v.chapters[i];
+    player.src = `${v.dir}/ch${pad(c.n)}.mp4`;
+    now.textContent = `${pad(c.n)} · ${c.title}`;
+    list.querySelectorAll('button').forEach((b, k) => b.setAttribute('aria-current', k === i ? 'true' : 'false'));
+    if (play) player.play().catch(() => {});
+  };
+  v.chapters.forEach((c, i) => {
+    const li = document.createElement('li'), b = document.createElement('button');
+    b.type = 'button';
+    b.innerHTML = '<span class="num"></span><span class="t"></span><span class="time"></span>';
+    b.querySelector('.num').textContent = pad(c.n);
+    b.querySelector('.t').textContent = c.title;
+    b.querySelector('.time').textContent = fmt(c.start);
+    b.addEventListener('click', () => load(i, true));
+    li.append(b); list.append(li);
+  });
+  player.addEventListener('ended', () => { if (current < v.chapters.length - 1) load(current + 1, true); });
+  stage.append(left, list);
+  sec.append(h, d);
+  if (v.chapters.length) sec.append(stage);
+  if (v.url) {  // the version's single-file page: the complete film to watch or download
+    const a = document.createElement('a'); a.className = 'one-file'; a.href = v.url;
+    a.textContent = v.chapters.length ? 'Watch or download it as one file' : 'Watch or download the film';
+    sec.append(a);
+  }
+  document.getElementById('versions').append(sec);
+  if (v.chapters.length) load(0, false);
+});
+</script>

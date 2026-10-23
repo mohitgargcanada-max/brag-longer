@@ -1,0 +1,37 @@
+/* Video-only styles. The product's look comes from brand/brand.css, loaded first; it sets --font-display,
+   --font-body, --stage-bg, --accent, --glow-1 and --glow-2 (fallbacks below are a dark violet/gold look). */
+html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+#stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--stage-bg, #121124); color: #D9D8E6; font-family: var(--font-body); }
+.layer { position: absolute; inset: 0; overflow: hidden; visibility: hidden; }
+
+/* ---- Brand stage for non-app scenes: kinetic type, diagrams, charts ---- */
+.title-xl { font: 600 96px/1.08 var(--font-display); color: #fff; letter-spacing: -0.02em; text-wrap: balance; }
+.title-l  { font: 600 68px/1.12 var(--font-display); color: #fff; letter-spacing: -0.015em; text-wrap: balance; }
+.title-m  { font: 600 48px/1.18 var(--font-display); color: #fff; text-wrap: balance; }
+.title-s  { font: 600 34px/1.25 var(--font-display); color: #fff; }
+.body-l   { font: 400 30px/1.5 var(--font-body); color: #D9D8E6; }
+.body-m   { font: 400 24px/1.5 var(--font-body); color: #B9B8CC; }
+.eyebrow-v { font: 600 20px var(--font-display); letter-spacing: .14em; text-transform: uppercase; color: var(--accent, #D4AF37); }
+.gold { color: var(--accent, #D4AF37); }
+.violet { color: #8D89D6; }
+.muted { color: #9A99B5; }
+.center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 28px; padding: 0 160px; }
+.panel { background: #1B1A33; border: 1px solid #26244A; border-radius: 20px; box-shadow: 0 24px 60px rgba(0,0,0,.35); }
+.glow { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .35; pointer-events: none; }
+.logo-q { width: 120px; height: 120px; border-radius: 26px; }
+.wordmark { font: 600 84px var(--font-display); color: #fff; letter-spacing: -0.01em; }
+
+[data-caret="1"]::after { content: ""; display: inline-block; width: .08em; height: 1em; margin-left: .06em; vertical-align: -0.12em; background: currentColor; }
+
+/* ---- App frame: the real app's markup at 1440x810, scaled up to fill the 1080p frame ---- */
+.app { position: absolute; left: 0; top: 0; width: 1440px; height: 810px; transform-origin: 0 0; transform: scale(1.3333); overflow: hidden; }
+.app-cam { position: absolute; inset: 0; transform-origin: 0 0; }
+
+/* ---- Chrome drawn by the engine ---- */
+.chapter-label { position: absolute; left: 56px; top: 44px; display: flex; gap: 14px; align-items: baseline; font: 500 20px var(--font-display); color: #9A99B5; letter-spacing: .04em; z-index: 20; }
+.chapter-label b { color: var(--accent, #D4AF37); font-weight: 600; }
+.demo-chip { position: absolute; right: 40px; bottom: 36px; z-index: 20; font: 500 17px var(--font-display); color: #E8C563; background: rgba(18,17,36,.88); border: 1px solid rgba(232,197,99,.45); border-radius: 999px; padding: 7px 16px; }
+.cursor { position: absolute; left: 0; top: 0; z-index: 30; pointer-events: none; filter: drop-shadow(0 3px 6px rgba(0,0,0,.5)); }
+.cursor i { position: absolute; left: 6px; top: 4px; width: 56px; height: 56px; border-radius: 50%; border: 3px solid #E8C563; }
+.highlight-ring { position: absolute; border: 3px solid #E8C563; border-radius: 14px; box-shadow: 0 0 0 9999px rgba(10,9,24,.55); pointer-events: none; z-index: 25; }
+.callout-v { position: absolute; z-index: 26; background: #1B1A33; border: 1px solid rgba(232,197,99,.55); color: #fff; border-radius: 14px; padding: 18px 24px; font: 500 26px/1.35 var(--font-display); box-shadow: 0 18px 40px rgba(0,0,0,.45); max-width: 620px; }

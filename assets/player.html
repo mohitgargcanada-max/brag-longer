@@ -1,0 +1,21 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Video chapter</title>
+<!-- Defaults first, so a missing brand still renders; brand/brand.css (fonts, colour tokens, the product's own app CSS)
+     overrides them; kit.css (video-only styles) comes last. -->
+<style>:root { --font-display: "Segoe UI", system-ui, sans-serif; --font-body: "Segoe UI", system-ui, sans-serif; }</style>
+<link rel="stylesheet" href="../../brand/brand.css">
+<link rel="stylesheet" href="kit.css">
+<div id="stage"></div>
+<script src="engine.js"></script>
+<script src="kit.js"></script>
+<script src="../out/timeline.js"></script>
+<script>
+  const CH = +new URLSearchParams(location.search).get('ch');
+  document.write(`<script src="ch${String(CH).padStart(2, '0')}.js"><\/script>`);
+</script>
+<script>
+  Demo.start(CH);
+  Promise.all([document.fonts.ready, ...[...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; }))])
+    .then(() => { seek(0); window.ready = true; });
+</script>

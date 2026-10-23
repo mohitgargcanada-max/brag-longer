@@ -1,0 +1,132 @@
+<title>/*TITLE*/</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Lato:wght@400;700&display=swap">
+<style>
+/* Layout: one film, full width, with play and download under it. Brand tokens. */
+/* Restyle: set these tokens (and the fonts link) to the product's brand; everything below uses them. */
+:root {
+  --bg: #F8F9FC; --card: #FFFFFF; --ink: #25243A; --muted: #5D5C72; --line: #E4E3F2;
+  --brand: #403D88; --accent: #5A56A7; --gold: #B3922B; --err: #DC2626;
+  --display: "Poppins", "Segoe UI", system-ui, sans-serif; --body: "Lato", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121124; --card: #1B1A33; --ink: #D9D8E6; --muted: #9A99B5; --line: #26244A;
+  --brand: #FFFFFF; --accent: #8D89D6; --gold: #D4AF37; --err: #E58A7D; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #121124; --card: #1B1A33; --ink: #D9D8E6; --muted: #9A99B5; --line: #26244A;
+  --brand: #FFFFFF; --accent: #8D89D6; --gold: #D4AF37; --err: #E58A7D; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font: 15px/1.6 var(--body); }
+main { max-width: 1120px; margin: 0 auto; padding-inline: 16px; padding-block: 32px 56px; display: grid; gap: 22px; }
+.eyebrow { font: 600 12px var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--gold); margin: 0; }
+h1 { font: 600 30px/1.2 var(--display); color: var(--brand); margin: 4px 0 8px; text-wrap: balance; }
+p { margin: 0; color: var(--muted); max-width: 76ch; }
+.screen { position: relative; aspect-ratio: 16 / 9; max-width: 100%; border-radius: 14px; overflow: hidden; background: #000; }
+.screen img, .screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.screen video { object-fit: contain; background: #000; }
+.play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; gap: 10px; align-items: center;
+  font: 600 17px var(--display); color: #121124; background: #E8C563; border: 0; border-radius: 999px; padding: 14px 26px; cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0,0,0,.45); }
+.play svg { width: 18px; height: 18px; }
+.play:disabled { cursor: default; opacity: .9; }
+button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.bar { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+.dl { font: 500 15px var(--display); border-radius: 10px; padding: 10px 18px; cursor: pointer; border: 1px solid var(--accent); background: var(--accent); color: #fff; }
+.dl:disabled { opacity: .55; cursor: default; }
+.status { font-size: 14px; color: var(--muted); }
+.status.err { color: var(--err); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.facts b { color: var(--ink); font-weight: 700; }
+.notes { border-top: 1px solid var(--line); padding-top: 16px; font-size: 14px; }
+</style>
+<main>
+  <section>
+    <p class="eyebrow" id="eyebrow"></p>
+    <h1 id="title"></h1>
+    <p id="description"></p>
+  </section>
+  <div class="screen" id="screen">
+    <img id="poster" alt="">
+    <button type="button" class="play" id="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="currentColor"/></svg><span>Play the full video</span></button>
+  </div>
+  <div class="bar">
+    <button type="button" class="dl" id="dl" hidden>Download MP4</button>
+    <span class="status" id="status" role="status"></span>
+  </div>
+  <div class="facts" id="facts"></div>
+  <p class="notes">/*NOTE*/</p>
+</main>
+<script>
+const VIDEO = /*VIDEO*/{};
+const $ = id => document.getElementById(id);
+$('eyebrow').textContent = `/*PRODUCT*/ · demo video · version ${VIDEO.version}`;
+$('title').textContent = VIDEO.title;
+$('description').textContent = VIDEO.description;
+$('poster').src = VIDEO.poster;
+$('dl').textContent = `Download MP4 · ${VIDEO.label}`;
+for (const [k, val] of [['Length', VIDEO.length], ['Quality', '1080p, 30 fps'], ['File', VIDEO.file], ['Size', VIDEO.label.split('· ')[1]]]) {
+  const s = document.createElement('span'); const b = document.createElement('b'); b.textContent = val;
+  s.append(`${k}: `, b); $('facts').append(s);
+}
+const status = (text, err = false) => { $('status').textContent = text; $('status').className = 'status' + (err ? ' err' : ''); };
+const hex = buf => [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+
+// The full-quality MP4 is stored in base64 text chunks under the page's per-file limit. Rejoin them once, check the fingerprint
+// against the original, and share the one file between playing and downloading.
+let blobPromise = null;
+function getFile() {
+  if (!blobPromise) blobPromise = (async () => {
+    const bufs = [];
+    for (let i = 0; i < VIDEO.parts.length; i++) {
+      status(`Loading the full video: part ${i + 1} of ${VIDEO.parts.length}…`);
+      const r = await fetch(VIDEO.parts[i]);
+      if (!r.ok) throw new Error('fetch');
+      const b64 = atob((await r.text()).trim());  // chunks are base64 text: artifacts serve only web file types
+      const bytes = new Uint8Array(b64.length);
+      for (let j = 0; j < b64.length; j++) bytes[j] = b64.charCodeAt(j);
+      bufs.push(bytes);
+    }
+    const blob = new Blob(bufs, { type: 'video/mp4' });
+    status('Checking the file is complete…');
+    if (hex(await crypto.subtle.digest('SHA-256', await blob.arrayBuffer())) !== VIDEO.sha256) throw new Error('checksum');
+    status('');
+    return blob;
+  })().catch(e => { blobPromise = null; throw e; });
+  return blobPromise;
+}
+const failText = e => e && e.message === 'checksum' ? 'The video did not come through complete. Try again.' : 'The video could not be loaded just now. Try again.';
+
+$('play').addEventListener('click', async () => {
+  $('play').disabled = true;
+  try {
+    const blob = await getFile();
+    const v = document.createElement('video');
+    v.controls = true; v.playsInline = true; v.setAttribute('aria-label', VIDEO.title);
+    v.addEventListener('error', () => status('This view cannot play the full file. Use Download to watch it on your computer.', true));
+    v.src = URL.createObjectURL(blob);
+    $('screen').replaceChildren(v);
+    v.play().catch(() => {});
+  } catch (e) { status(failText(e), true); $('play').disabled = false; }
+});
+
+let downloads = null;
+$('dl').addEventListener('click', async () => {
+  $('dl').disabled = true;
+  try {
+    const blob = await getFile();
+    status('Confirm the download in the prompt.');
+    await downloads.save({ filename: VIDEO.file, data: blob });
+    status(`Saved ${VIDEO.file}.`);
+  } catch (e) {
+    const code = e && e.code;
+    status(code === 'declined' ? 'Download cancelled.'
+      : code === 'rate_limited' ? 'Another download prompt is open. Finish it, then try again.'
+      : code ? 'The download did not work just now. Try again.' : failText(e), !['declined'].includes(code));
+  } finally { $('dl').disabled = false; }
+});
+const showDownloads = d => {
+  downloads = d;
+  $('dl').hidden = !d;
+  if (!d) status('Downloading is not available in this view; the file is in /*FINAL_DIR_JS*/.');
+};
+if (window.claude && window.claude.use) window.claude.use('downloads').then(showDownloads, () => showDownloads(null));
+else showDownloads(null);
+</script>
